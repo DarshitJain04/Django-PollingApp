@@ -1,0 +1,15 @@
+{% extends "polls/base.html" %}
+{% block content%}
+	<form method="POST">
+		<div class="card">
+			<h2>{{q_form.as_p}}</h2>
+			<div class="card-body">
+				<p class="card-text">
+						{% csrf_token %}
+						{{c_form.as_p}}
+					<button type="submit" class="btn-primary ml-3 mb-3">Save</button>
+				</p>
+			</div>
+		</div>
+	</form>
+{% endblock content %}
