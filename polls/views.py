@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render,get_object_or_404, redirect, HttpResponseRedirect
 from .models import *
 from .forms import *
 from django.forms import modelformset_factory
@@ -42,10 +42,10 @@ def vote(request, question_id ):
 	question = get_object_or_404(Question,pk=question_id)
 	options = question.choice_set.all() #or choices = Choice.objects.filter(question=question)
 	if request.method == 'POST':
-		selected_option =  question.choice_set.get(pk=request.POST['choice'])
+		selected_option =  question.choice_set.get(pk=request.POST['option'])
 		selected_option.votes = selected_option.votes +1
 		selected_option.save()
-		return reverse('result', kwargs={'pk':question_id})
+		return HttpResponseRedirect(reverse('result', args=(question_id,)))
 	context = {'options':options, 'question':question
 	}
 	return render(request,'polls/vote.html',context)
