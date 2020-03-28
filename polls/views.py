@@ -42,7 +42,7 @@ def vote(request, question_id ):
 	question = get_object_or_404(Question,pk=question_id)
 	options = question.choice_set.all() #or choices = Choice.objects.filter(question=question)
 	if request.method == 'POST':
-		selected_option = request.POST.get('objects')
+		selected_option =  question.choice_set.get(pk=request.POST['options'])
 		selected_option.votes = selected_option.votes +1
 		selected_option.save()
 		return reverse('result', kwargs={'pk':question_id})
