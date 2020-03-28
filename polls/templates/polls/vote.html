@@ -6,9 +6,8 @@
 		{% csrf_token %}
 		{% for option in options %}
 			<div class="form-check-inline">
-	  			<label class="form-check-label">
-	    			<input type="radio" class="form-check-input" name="poll" value="option {{option.id}}">{{option}}
-	    		</label>
+	    		<input type="radio" class="form-check-input" name="option" id="option{{ forloop.counter }}" value="{{option.id}}">
+	    		<label class="form-check-label" for="option{{ forloop.counter }}">{{option}}</label>
 	    	</div>
 		{% endfor %}
 		<div>
